@@ -1,0 +1,19 @@
+Difference between Application Manager and Application Master in YARN?
+
+The terms Application Master and Application Manager are often used interchangeably. 
+In reality Application Master is the main container requesting, launching and monitoring application specific resources, 
+whereas Application Manager is a component inside ResourceManager. More details about Application Manager is given below.
+
+The ApplicationsManager is responsible for maintaining a collection of submitted applications. 
+After application submission, it first validates the application’s specifications and rejects any application that 
+requests unsatisfiable resources for its ApplicationMaster (i.e., there is no node in the cluster that has enough 
+resources to run the ApplicationMaster itself). It then ensures that no other application was already submitted with 
+the same application ID—a scenario that can be caused by an erroneous or a malicious client. Finally, it forwards the 
+admitted application to the scheduler. This component is also responsible for recording and managing finished applications 
+for a while before they are completely evacuated from the ResourceManager’s memory. When an application finishes, 
+it places an ApplicationSummary in the daemon’s log file. Finally, the ApplicationsManager keeps a cache of completed 
+applications long after applications finish to support users’ requests for application data (via web UI or command line). 
+The configuration property yarn.resourcemanager.max-completed-applications controls the maximum number of such finished 
+applications that the ResourceManager remembers at any point of time. The cache is a first-in, first-out list, with the 
+oldest applications being moved out to accommodate freshly finished applications.
+
