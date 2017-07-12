@@ -17,3 +17,6 @@ The configuration property yarn.resourcemanager.max-completed-applications contr
 applications that the ResourceManager remembers at any point of time. The cache is a first-in, first-out list, with the 
 oldest applications being moved out to accommodate freshly finished applications.
 
+Resource :
+https://stackoverflow.com/questions/30967247/difference-between-application-manager-and-application-master-in-yarn
+
